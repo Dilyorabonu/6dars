@@ -4,14 +4,13 @@ import { Outlet } from "react-router-dom";
 //components
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
-// props
+import { useState } from "react";
 
 function MainLayout() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="site-container">
         <Outlet />
       </main>
       <Footer />

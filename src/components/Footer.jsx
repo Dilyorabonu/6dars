@@ -1,9 +1,12 @@
-import React from 'react'
-
-function Footer() {
+function Footer({ color, changeColor }) {
   return (
-    <div>Footer</div>
-  )
+    <div>
+      <div
+        onClick={() => changeColor("green")}
+        style={{ color: color, cursor: "pointer" }}
+      ></div>
+    </div>
+  );
 }
 
-export default Footer
+export default Footer;
