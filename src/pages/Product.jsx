@@ -11,7 +11,9 @@ function Product() {
       {data && (
         <div className="card w-96 bg-base-100 shadow-xl site-container">
           <div className="card-body">
-            <h1 className="card-title font-bold">{data.title}</h1>
+            <h1 className="card-title font-bold">
+              {data.title}
+            </h1>
             <h2>{data.brand}</h2>
             <figure>
               <img src={data.thumbnail} alt="" />
