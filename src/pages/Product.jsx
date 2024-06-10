@@ -19,7 +19,7 @@ function Product() {
             </figure>
             <h2>Tags: {data.tags}</h2>
             <h2>Rating: {data.rating}</h2>
-            <p> Stock :{data.stock}</p>
+            <p> Stock: {data.stock}</p>
             <p>Price: ${data.price}</p>
             <p>Discount: {data.discountPercentage}%</p>
             <div className="card-actions justify-end">
