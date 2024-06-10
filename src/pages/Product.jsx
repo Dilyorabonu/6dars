@@ -9,17 +9,17 @@ function Product() {
   return (
     <>
       {data && (
-        <div className="card w-96 bg-base-100 shadow-xl site-container">
+        <div className="card w-210 bg-base-200 shadow-xl site-container">
           <div className="card-body">
-            <h1 className="card-title font-bold">
-              {data.title}
-            </h1>
-            <h2>{data.brand}</h2>
+            <h1 className="card-title">Title: {data.title}</h1>
+            <h2>Brand: {data.brand}</h2>
+            <h2>Rating: {data.rating}</h2>
             <figure>
               <img src={data.thumbnail} alt="" />
             </figure>
             <p>{data.description}</p>
-            <p>${data.price}</p>
+            <p>Price: ${data.price}</p>
+            <p>Discount: {data.discountPercentage}%</p>
             <div className="card-actions justify-end">
               <button className="btn btn-secondary">Buy Now</button>
             </div>
