@@ -12,12 +12,14 @@ function Product() {
         <div className="card w-210 bg-base-200 shadow-xl site-container">
           <div className="card-body">
             <h1 className="card-title">Title: {data.title}</h1>
-            <h2>Brand: {data.brand}</h2>
-            <h2>Rating: {data.rating}</h2>
+            <p>{data.description}</p>
+            <p>Category: {data.category}</p>
             <figure>
               <img src={data.thumbnail} alt="" />
             </figure>
-            <p>{data.description}</p>
+            <h2>Brand: {data.brand}</h2>
+            <h2>Rating: {data.rating}</h2>
+            <p> Stock :{data.stock}</p>
             <p>Price: ${data.price}</p>
             <p>Discount: {data.discountPercentage}%</p>
             <div className="card-actions justify-end">

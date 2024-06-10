@@ -6,4 +6,17 @@
     .site-container {
         @apply max-w-7xl mx-auto w-full
     }
+
+    html, body, #root{
+        @apply h-full
+    }
+
+    #root{
+        @apply flex flex-col
+    }
+
+
+    main{
+        @apply grow
+    }
 }
