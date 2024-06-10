@@ -21,7 +21,7 @@ function Product() {
             <p>Price: ${data.price}</p>
             <p>Discount: {data.discountPercentage}%</p>
             <div className="card-actions justify-end">
-              <button className="btn btn-secondary">Buy Now</button>
+              <button className="btn btn-secondary">Buy now!</button>
             </div>
           </div>
         </div>
