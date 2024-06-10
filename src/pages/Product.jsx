@@ -17,7 +17,7 @@ function Product() {
             <figure>
               <img src={data.thumbnail} alt="" />
             </figure>
-            <h2>Brand: {data.brand}</h2>
+            <h2>Tags: {data.tags}</h2>
             <h2>Rating: {data.rating}</h2>
             <p> Stock :{data.stock}</p>
             <p>Price: ${data.price}</p>
