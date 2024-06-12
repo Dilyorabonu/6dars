@@ -11,6 +11,8 @@ function themeFromLocalStorage() {
   return localStorage.getItem("theme") || "winter";
 }
 
+import { useGlobalContext } from "../hooks/useGlobalContext";
+
 function Navbar() {
   const [theme, setTheme] = useState(themeFromLocalStorage());
 

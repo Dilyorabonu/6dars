@@ -6,11 +6,25 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Product from "./pages/Product";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
+//context
+import { useContext } from "react";
+import { GlobalContext } from "./context/GlobalContext";
+
+import ProtectedRoutes from "./components/ProtectedRoutes";
 function App() {
+  const { user } = useContext(GlobalContext);
+  console.log(user);
   const routes = createBrowserRouter([
     {
       path: "/",
-      element: <MainLayout />,
+      element: (
+        <ProtectedRoutes user={user}>
+          <MainLayout />
+        </ProtectedRoutes>
+      ),
       children: [
         {
           index: true,
@@ -29,6 +43,14 @@ function App() {
           element: <Product />,
         },
       ],
+    },
+    {
+      path: "/login",
+      element: user ? <Navigate to="/" /> : <Login />,
+    },
+    {
+      path: "/register",
+      element: user ? <Navigate to="/" /> : <Register />,
     },
   ]);
 
