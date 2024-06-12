@@ -10,10 +10,11 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 //context
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "./context/GlobalContext";
 
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import { onAuthStateChanged } from "firebase/auth";
 function App() {
   const { user } = useContext(GlobalContext);
   console.log(user);
@@ -53,6 +54,10 @@ function App() {
       element: user ? <Navigate to="/" /> : <Register />,
     },
   ]);
+
+  useEffect(() => {
+    onAuthStateChanged(auth)
+  }, [])
 
   return <RouterProvider router={routes} />;
 }
