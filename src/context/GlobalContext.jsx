@@ -1,6 +1,5 @@
 import { createContext, useReducer, useState } from "react";
 import Product from "../pages/Product";
-
 export const GlobalContext = createContext();
 
 const changeState = (state, action) => {
@@ -19,7 +18,7 @@ function GlobalContextProvider({ children }) {
   const [state, dispatch] = useReducer(changeState, {
     user: null,
     products: [],
-    total: 0
+    total: 0,
   });
   return (
     <GlobalContext.Provider value={{ ...state }}>
