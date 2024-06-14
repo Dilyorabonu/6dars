@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 
 //components
 import ProtectedRoutes from "./components/ProtectedRoutes";
@@ -17,10 +21,11 @@ import Register from "./pages/Register";
 //context
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "./context/GlobalContext";
-
 import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase/firebaseConfig";
+
 function App() {
-  const { user } = useContext(GlobalContext);
+  const { user, dispatch, isAuthChange } = useContext(GlobalContext);
   console.log(user);
   const routes = createBrowserRouter([
     {
@@ -60,10 +65,13 @@ function App() {
   ]);
 
   useEffect(() => {
-    onAuthStateChanged(auth);
+    onAuthStateChanged(auth, (user) => {
+      dispatch({ type: "LOG_IN", payload: user });
+      dispatch({ type: "AUTH_CHANGE" });
+    });
   }, []);
 
-  return <RouterProvider router={routes} />;
+  return <>{isAuthChange && <RouterProvider router={routes} />}</>;
 }
 
 export default App;

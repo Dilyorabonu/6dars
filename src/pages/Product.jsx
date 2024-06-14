@@ -1,7 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 
+import { useContext } from "react";
+import { GlobalContext } from "../context/GlobalContext";
+
 function Product() {
+  const { color, changeColor } = useContext(GlobalContext);
+  console.log(color);
   const { id } = useParams();
   const { data, setData, error } = useFetch(
     "https://dummyjson.com/products/" + id
@@ -23,7 +28,13 @@ function Product() {
             <p>Price: ${data.price}</p>
             <p>Discount: {data.discountPercentage}%</p>
             <div className="card-actions justify-end">
-              <button className="btn btn-secondary">Buy Now!</button>
+              <div className="flex items-center gap-4 mb-10">
+                <button className="btn btn-secondary">+</button>
+                <div>0</div>
+                <button className="btn btn-secondary">-</button>
+
+                <button>Add</button>
+              </div>
             </div>
           </div>
         </div>

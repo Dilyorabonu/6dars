@@ -1,5 +1,5 @@
 import { createContext, useReducer, useState } from "react";
-import Product from "../pages/Product";
+
 export const GlobalContext = createContext();
 
 const changeState = (state, action) => {
@@ -9,6 +9,9 @@ const changeState = (state, action) => {
       return { ...state, user: payload };
     case "LOG_OUT":
       return { ...state, user: null };
+    case "AUTH_CHANGE": {
+      return { ...state, isAuthChange: true };
+    }
     default:
       return state;
   }
@@ -19,9 +22,10 @@ function GlobalContextProvider({ children }) {
     user: null,
     products: [],
     total: 0,
+    isAuthChange: false,
   });
   return (
-    <GlobalContext.Provider value={{ ...state }}>
+    <GlobalContext.Provider value={{ ...state, dispatch }}>
       {children}
     </GlobalContext.Provider>
   );

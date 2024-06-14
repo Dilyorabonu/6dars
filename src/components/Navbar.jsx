@@ -1,6 +1,8 @@
 //icons
 import { IoMdSunny, IoMdMoon } from "react-icons/io";
 
+import { FaCartShopping } from "react-icons/fa6";
+
 import { Link } from "react-router-dom";
 
 import NavLinks from "./NavLinks";
@@ -11,10 +13,24 @@ function themeFromLocalStorage() {
   return localStorage.getItem("theme") || "winter";
 }
 
+import { auth } from "../firebase/firebaseConfig";
+import { signOut } from "firebase/auth";
+
 import { useGlobalContext } from "../hooks/useGlobalContext";
 
 function Navbar() {
+  const { total, user } = useGlobalContext();
   const [theme, setTheme] = useState(themeFromLocalStorage());
+
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        //
+      });
+  };
 
   const handleTheme = () => {
     const newTheme = theme == "winter" ? "dracula" : "winter";
@@ -39,7 +55,13 @@ function Navbar() {
             <NavLinks />
           </ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end flex gap-10 items-center">
+        <div className="indicator">
+            <span className="indicator-item badge badge-md badge-secondary">
+              {total}
+            </span>
+            <FaCartShopping className="w-7 h-7" />
+          </div>
           <label className="swap swap-rotate">
             {/* this hidden checkbox controls the state */}
             <input
@@ -55,6 +77,17 @@ function Navbar() {
             {/* moon icon */}
             <IoMdMoon className="swap-off fill-current w-7 h-7" />
           </label>
+          <div className="flex items-center gap-4">
+            <p className="">{user.displayName}</p>
+            <div className="avatar">
+              <div className="w-12 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
+                <img src={user.photoURL} />
+              </div>
+            </div>
+            <button onClick={logout} className="btn btn-secondary">
+              Log out
+            </button>
+          </div>
         </div>
       </div>
     </div>
