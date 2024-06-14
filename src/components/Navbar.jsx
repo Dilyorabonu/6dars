@@ -20,6 +20,7 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 
 function Navbar() {
   const { total, user } = useGlobalContext();
+  console.log(user);
   const [theme, setTheme] = useState(themeFromLocalStorage());
 
   const logout = () => {
