@@ -13,10 +13,14 @@ function useRegister() {
 
       await updateProfile(auth.currentUser, {
         displayName: userData.displayName,
+        photoURL: userData.photoURL,
       });
       const userCredential = result.user;
-      console.log(userCredential);
-    } catch (error) {}
+      // dispatch({"LOG_IN", payload: userCredential})
+    } catch (error) {
+      const errorMessage = error.message;
+      console.log(errorMessage);
+    }
   };
 
   return { registerWithEmailAndPassword };

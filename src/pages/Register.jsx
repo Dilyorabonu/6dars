@@ -10,8 +10,9 @@ export const action = async ({ request }) => {
   let displayName = formData.get("displayName");
   let email = formData.get("email");
   let password = formData.get("password");
+  let photoURL = formData.get("photoURL");
 
-  return { displayName, email, password };
+  return { displayName, email, password, photoURL };
 };
 function Register() {
   const userData = useActionData();
@@ -32,6 +33,11 @@ function Register() {
           type="text"
           labelText="Display name:"
           name="displayName"
+        ></FormInput>
+        <FormInput
+          type="url"
+          labelText="Photo URL:"
+          name="photoURL"
         ></FormInput>
         <FormInput type="email" labelText="Email:" name="email"></FormInput>
         <FormInput
