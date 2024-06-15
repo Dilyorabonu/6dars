@@ -73,9 +73,12 @@ function Register({ onLoginClick }) {
           Google
         </button>
       </Form>
-      <p className="text-center">
+      <p className="text-center mb-5">
         Already have an account?
-        <button className="btn btn-secondary btn-block mt-2" onClick={onLoginClick}>
+        <button
+          className="btn btn-secondary btn-block mt-2"
+          onClick={onLoginClick}
+        >
           Sign In
         </button>
       </p>

@@ -21,17 +21,11 @@ function Login({ onRegisterClick }) {
     localStorage.setItem("theme", theme);
   }, [theme]);
   const { signUpWithGoogle } = useLogin();
-  
+
   return (
     <div className="min-h-screen grid place-items-center">
       <Form method="post" className="w-96">
         <h1 className="text-3xl font-bold text-center mb-4">Login</h1>
-        <FormInput
-          type="text"
-          labelText="Username:"
-          name="userName"
-          required
-        ></FormInput>
         <FormInput type="email" labelText="Email:" name="email"></FormInput>
         <FormInput
           type="password"
