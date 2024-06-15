@@ -1,4 +1,4 @@
-function FormInput({labelText, name, type}) {
+function FormInput({ labelText, name, type }) {
   return (
     <div>
       <label className="form-control w-full">
