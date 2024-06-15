@@ -3,7 +3,7 @@ import { useLogin } from "../hooks/useLogin";
 
 import { Form, useActionData } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const action = async ({ request }) => {
   let formData = await request.formData();
@@ -14,7 +14,22 @@ export const action = async ({ request }) => {
 
   return { displayName, email, password, photoURL };
 };
-function Register() {
+
+function themeFromLocalStorage() {
+  return localStorage.getItem("theme") || "winter";
+}
+
+function Register({ onLoginClick }) {
+  const [theme, setTheme] = useState(themeFromLocalStorage());
+  const handleTheme = () => {
+    const newTheme = theme == "winter" ? "dracula" : "winter";
+    setTheme(newTheme);
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
   const userData = useActionData();
   const { registerWithEmailAndPassword } = useRegister();
 
@@ -58,6 +73,12 @@ function Register() {
           Google
         </button>
       </Form>
+      <p className="text-center">
+        Already have an account?
+        <button className="btn btn-secondary btn-block mt-2" onClick={onLoginClick}>
+          Sign In
+        </button>
+      </p>
     </div>
   );
 }
