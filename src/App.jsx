@@ -26,6 +26,7 @@ import { auth } from "./firebase/firebaseConfig";
 
 //action
 import { action as RegisterAction } from "./pages/Register";
+import { action as LoginAction } from "./pages/Login";
 
 function App() {
   const { user, dispatch, isAuthChange } = useContext(GlobalContext);
@@ -60,6 +61,7 @@ function App() {
     {
       path: "/login",
       element: user ? <Navigate to="/" /> : <Login />,
+      action: LoginAction,
     },
     {
       path: "/register",

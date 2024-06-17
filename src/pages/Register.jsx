@@ -1,7 +1,7 @@
 import FormInput from "../components/FormInput";
 import { useLogin } from "../hooks/useLogin";
 
-import { Form, useActionData } from "react-router-dom";
+import { Form, useActionData, Link } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
 import { useEffect, useState } from "react";
 
@@ -19,7 +19,7 @@ function themeFromLocalStorage() {
   return localStorage.getItem("theme") || "winter";
 }
 
-function Register({ onLoginClick }) {
+function Register() {
   const [theme, setTheme] = useState(themeFromLocalStorage());
   const handleTheme = () => {
     const newTheme = theme == "winter" ? "dracula" : "winter";
@@ -73,14 +73,11 @@ function Register({ onLoginClick }) {
           Google
         </button>
       </Form>
-      <p className="text-center mb-5">
+      <p className="text-center mb-5 flex gap-2">
         Already have an account?
-        <button
-          className="btn btn-secondary btn-block mt-2"
-          onClick={onLoginClick}
-        >
+        <Link to="/login" className="link">
           Sign In
-        </button>
+        </Link>
       </p>
     </div>
   );

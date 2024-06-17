@@ -1,7 +1,7 @@
 import FormInput from "../components/FormInput";
 import { useLogin } from "../hooks/useLogin";
 
-import { Form, useActionData } from "react-router-dom";
+import { Form, useActionData, Link } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
 import { useEffect, useState } from "react";
 
@@ -9,7 +9,15 @@ function themeFromLocalStorage() {
   return localStorage.getItem("theme") || "winter";
 }
 
-function Login({ onRegisterClick }) {
+export const action = async ({ request }) => {
+  let formData = await request.formData();
+  let email = formData.get("email");
+  let password = formData.get("password");
+
+  return { email, password };
+};
+
+function Login() {
   const [theme, setTheme] = useState(themeFromLocalStorage());
   const handleTheme = () => {
     const newTheme = theme == "winter" ? "dracula" : "winter";
@@ -20,7 +28,13 @@ function Login({ onRegisterClick }) {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
-  const { signUpWithGoogle } = useLogin();
+  const { signUpWithGoogle, loginWithEmail } = useLogin();
+  const userData = useActionData();
+  useEffect(() => {
+    if (userData) {
+      loginWithEmail(userData.email, userData.password);
+    }
+  }, [userData]);
 
   return (
     <div className="min-h-screen grid place-items-center">
@@ -46,14 +60,11 @@ function Login({ onRegisterClick }) {
           Google
         </button>
       </Form>
-      <p className="text-center">
+      <p className="text-center mb-5 flex gap-2">
         Don't have an account?
-        <button
-          className="btn btn-secondary btn-block mt-2"
-          onClick={onRegisterClick}
-        >
+        <Link to="/register" className="link">
           Sign Up
-        </button>
+        </Link>
       </p>
     </div>
   );

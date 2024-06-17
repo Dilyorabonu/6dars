@@ -1,8 +1,9 @@
 import { auth } from "../firebase/firebaseConfig";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
-
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useGlobalContext } from "./useGlobalContext";
 function useRegister() {
+  const {dispatch} = useGlobalContext()
   const registerWithEmailAndPassword = async (userData) => {
     try {
       const result = await createUserWithEmailAndPassword(
@@ -16,7 +17,7 @@ function useRegister() {
         photoURL: userData.photoURL,
       });
       const userCredential = result.user;
-      // dispatch({"LOG_IN", payload: userCredential})
+      dispatch({ type: "LOG_IN", payload: userCredential });
     } catch (error) {
       const errorMessage = error.message;
       console.log(errorMessage);
