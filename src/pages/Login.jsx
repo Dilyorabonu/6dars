@@ -18,6 +18,10 @@ export const action = async ({ request }) => {
 };
 
 function Login() {
+  const [errorStatus, setErrorStatus] = useState({
+    email: "",
+    password: "",
+  });
   const [theme, setTheme] = useState(themeFromLocalStorage());
   const handleTheme = () => {
     const newTheme = theme == "winter" ? "dracula" : "winter";
@@ -33,6 +37,26 @@ function Login() {
   useEffect(() => {
     if (userData) {
       loginWithEmail(userData.email, userData.password);
+
+      if (userData.email == "") {
+        setErrorStatus((prev) => {
+          return { ...prev, email: "input-error" };
+        });
+      } else {
+        setErrorStatus((prev) => {
+          return { ...prev, email: "" };
+        });
+      }
+
+      if (userData.password == "") {
+        setErrorStatus((prev) => {
+          return { ...prev, password: "input-error" };
+        });
+      } else {
+        setErrorStatus((prev) => {
+          return { ...prev, password: "" };
+        });
+      }
     }
   }, [userData]);
 
@@ -40,12 +64,17 @@ function Login() {
     <div className="min-h-screen grid place-items-center">
       <Form method="post" className="w-96">
         <h1 className="text-3xl font-bold text-center mb-4">Login</h1>
-        <FormInput type="email" labelText="Email:" name="email"></FormInput>
+        <FormInput
+          type="email"
+          labelText="Email:"
+          name="email"
+          error={errorStatus.email}
+        ></FormInput>
         <FormInput
           type="password"
           labelText="Password:"
           name="password"
-          required
+          error={errorStatus.password}
         ></FormInput>
         <div className="mt-6">
           <button className="btn btn-secondary btn-block" type="submit">

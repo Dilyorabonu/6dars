@@ -26,6 +26,13 @@ function Register() {
     setTheme(newTheme);
   };
 
+  const [errorStatus, setErrorStatus] = useState({
+    name: "",
+    photoURL: "",
+    email: "",
+    password: "",
+  });
+
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
@@ -35,7 +42,48 @@ function Register() {
 
   useEffect(() => {
     if (userData) {
-      registerWithEmailAndPassword(userData);
+      // registerWithEmailAndPassword(userData);
+      console.log(userData);
+
+      if (userData.displayName == "") {
+        setErrorStatus((prev) => {
+          return { ...prev, name: "input-error" };
+        });
+      } else {
+        setErrorStatus((prev) => {
+          return { ...prev, name: "" };
+        });
+      }
+
+      if (userData.password == "") {
+        setErrorStatus((prev) => {
+          return { ...prev, password: "input-error" };
+        });
+      } else {
+        setErrorStatus((prev) => {
+          return { ...prev, password: "" };
+        });
+      }
+
+      if (userData.photoURL == "") {
+        setErrorStatus((prev) => {
+          return { ...prev, photoURL: "input-error" };
+        });
+      } else {
+        setErrorStatus((prev) => {
+          return { ...prev, photoURL: "" };
+        });
+      }
+
+      if (userData.email == "") {
+        setErrorStatus((prev) => {
+          return { ...prev, email: "input-error" };
+        });
+      } else {
+        setErrorStatus((prev) => {
+          return { ...prev, email: "" };
+        });
+      }
     }
   }, [userData]);
 
@@ -48,17 +96,25 @@ function Register() {
           type="text"
           labelText="Display name:"
           name="displayName"
+          error={errorStatus.name}
         ></FormInput>
         <FormInput
           type="url"
           labelText="Photo URL:"
           name="photoURL"
+          error={errorStatus.photoURL}
         ></FormInput>
-        <FormInput type="email" labelText="Email:" name="email"></FormInput>
+        <FormInput
+          type="email"
+          labelText="Email:"
+          name="email"
+          error={errorStatus.email}
+        ></FormInput>
         <FormInput
           type="password"
           labelText="Password:"
           name="password"
+          error={errorStatus.password}
         ></FormInput>
         <div className="mt-6">
           <button className="btn btn-secondary btn-block" type="submit">
