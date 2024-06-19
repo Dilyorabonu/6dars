@@ -42,8 +42,7 @@ function Register() {
 
   useEffect(() => {
     if (userData) {
-      // registerWithEmailAndPassword(userData);
-      console.log(userData);
+      registerWithEmailAndPassword(userData);
 
       if (userData.displayName == "") {
         setErrorStatus((prev) => {

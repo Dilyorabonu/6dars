@@ -2,6 +2,7 @@ import { auth } from "../firebase/firebaseConfig";
 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useGlobalContext } from "./useGlobalContext";
+import toast from "react-hot-toast";
 function useRegister() {
   const {dispatch} = useGlobalContext()
   const registerWithEmailAndPassword = async (userData) => {
@@ -18,9 +19,10 @@ function useRegister() {
       });
       const userCredential = result.user;
       dispatch({ type: "LOG_IN", payload: userCredential });
+      toast.success(`Welcome ${userCredential.displayName} `);
     } catch (error) {
       const errorMessage = error.message;
-      console.log(errorMessage);
+      toast.error(errorMessage);
     }
   };
 
