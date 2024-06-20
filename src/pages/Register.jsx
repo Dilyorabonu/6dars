@@ -43,12 +43,16 @@ function Register() {
 
   useEffect(() => {
     if (userData) {
-
-     if (userData.displayName && userData.email && userData.password && userData.photoURL) {
-      registerWithEmailAndPassword(userData);
-     } else {
-      toast.error("Please, enter all of them!")
-     }
+      if (
+        userData.displayName &&
+        userData.email &&
+        userData.password &&
+        userData.photoURL
+      ) {
+        registerWithEmailAndPassword(userData);
+      } else {
+        toast.error("Please, enter all of them!");
+      }
 
       if (userData.displayName == "") {
         setErrorStatus((prev) => {

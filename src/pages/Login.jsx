@@ -4,6 +4,7 @@ import { useLogin } from "../hooks/useLogin";
 import { Form, useActionData, Link } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 function themeFromLocalStorage() {
   return localStorage.getItem("theme") || "winter";
@@ -36,7 +37,11 @@ function Login() {
   const userData = useActionData();
   useEffect(() => {
     if (userData) {
-      loginWithEmail(userData.email, userData.password);
+      if (userData.email && userData.password) {
+        loginWithEmail(userData);
+      } else {
+        toast.error("Please, enter all of them!");
+      }
 
       if (userData.email == "") {
         setErrorStatus((prev) => {
