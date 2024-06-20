@@ -1,16 +1,22 @@
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 
 function Product() {
-  const { color, changeColor } = useContext(GlobalContext);
-  console.log(color);
+  const { addProduct } = useContext(GlobalContext);
+
   const { id } = useParams();
   const { data, setData, error } = useFetch(
     "https://dummyjson.com/products/" + id
   );
+
+  const [amount, setAmount] = useState(0);
+
+  const handleAdd = () => {
+    addProduct({ ...data, amount });
+  };
   return (
     <>
       {data && (
@@ -29,12 +35,31 @@ function Product() {
             <p>Discount: {data.discountPercentage}%</p>
             <div className="card-actions justify-end">
               <div className="flex items-center gap-4 mb-10">
-                <button className="btn btn-secondary">+</button>
-                <div>0</div>
-                <button className="btn btn-secondary">-</button>
-
-                <button>Add</button>
+                <button
+                  onClick={() => setAmount(amount + 1)}
+                  className="btn btn-secondary"
+                >
+                  +
+                </button>
+                <div>{amount}</div>
+                <button
+                  onClick={() => setAmount(amount - 1)}
+                  className="btn btn-secondary"
+                >
+                  -
+                </button>
+                <button onClick={handleAdd} className="btn btn-secondary">
+                  Add
+                </button>
               </div>
+            </div>
+            <div className="card-actions justify-end">
+              <button
+                onClick={() => changeColor("green")}
+                className="btn btn-secondary"
+              >
+                Click
+              </button>
             </div>
           </div>
         </div>

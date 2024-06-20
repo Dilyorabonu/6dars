@@ -20,7 +20,6 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 
 function Navbar() {
   const { total, user } = useGlobalContext();
-  console.log(user);
   const [theme, setTheme] = useState(themeFromLocalStorage());
 
   const logout = () => {
@@ -57,12 +56,14 @@ function Navbar() {
           </ul>
         </div>
         <div className="navbar-end flex gap-10 items-center">
-        <div className="indicator">
-            <span className="indicator-item badge badge-md badge-secondary">
-              {total}
-            </span>
-            <FaCartShopping className="w-7 h-7" />
-          </div>
+          <Link to="/cart">
+            <div className="indicator">
+              <span className="indicator-item badge badge-md badge-secondary">
+                {total}
+              </span>
+              <FaCartShopping className="w-7 h-7" />
+            </div>
+          </Link>
           <label className="swap swap-rotate">
             {/* this hidden checkbox controls the state */}
             <input

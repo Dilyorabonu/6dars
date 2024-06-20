@@ -4,6 +4,7 @@ import { useLogin } from "../hooks/useLogin";
 import { Form, useActionData, Link } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export const action = async ({ request }) => {
   let formData = await request.formData();
@@ -42,7 +43,12 @@ function Register() {
 
   useEffect(() => {
     if (userData) {
+
+     if (userData.displayName && userData.email && userData.password && userData.photoURL) {
       registerWithEmailAndPassword(userData);
+     } else {
+      toast.error("Please, enter all of them!")
+     }
 
       if (userData.displayName == "") {
         setErrorStatus((prev) => {

@@ -17,6 +17,7 @@ import Contact from "./pages/Contact";
 import Product from "./pages/Product";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Cart from "./pages/Cart";
 
 //context
 import { useContext, useEffect } from "react";
@@ -30,7 +31,6 @@ import { action as LoginAction } from "./pages/Login";
 
 function App() {
   const { user, dispatch, isAuthChange } = useContext(GlobalContext);
-  console.log(user);
   const routes = createBrowserRouter([
     {
       path: "/",
@@ -55,6 +55,10 @@ function App() {
         {
           path: "/product/:id",
           element: <Product />,
+        },
+        {
+          path: "/cart",
+          element: <Cart />,
         },
       ],
     },
