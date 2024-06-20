@@ -9,6 +9,7 @@ function stateFromLocalStorage() {
       user: null,
       products: [],
       total: 0,
+      totalPrice: 0,
       isAuthChange: false,
     }
   );
@@ -27,6 +28,8 @@ const changeState = (state, action) => {
       return { ...state, products: payload };
     case "CHANGE_TOTAL":
       return { ...state, total: payload };
+    case "CHANGE_TOTAL_PRICE":
+      return { ...state, totalPrice: payload };
     default:
       return state;
   }
@@ -54,24 +57,25 @@ function GlobalContextProvider({ children }) {
 
   //delete product
   const deleteProduct = (id) => {
-    const deletedProducts = state.oroducts.filter(
+    const deletedProducts = state.products.filter(
       (product) => product.id !== id
     );
 
-    dispatch({ type: "CHANGE_TOTAL", payload: deletedProducts });
+    dispatch({ type: "ADD_PRODUCT", payload: deletedProducts });
   };
 
   const increaseAmount = (id) => {
-    function toggleTodo(state, id) {
+    function toggleItem(state, id) {
       return produce(state, (draft) => {
         const product = draft.products.find((item) => item.id === id);
         product.amount = product.amount + 1;
       });
     }
 
-    const result = toggleTodo(state, id);
+    const result = toggleItem(state, id);
     dispatch({ type: "ADD_PRODUCT", payload: result.products });
   };
+
   const decreaseAmount = (id) => {
     function toggleItem(state, id) {
       return produce(state, (draft) => {
@@ -79,16 +83,22 @@ function GlobalContextProvider({ children }) {
         product.amount = product.amount - 1;
       });
     }
+
+    const result = toggleItem(state, id);
+    dispatch({ type: "ADD_PRODUCT", payload: result.products });
   };
 
   //calculate
-  function calculateTotal() {
+  function calculateTotal(id) {
     let counter = 0;
+    let counterPrice = 0;
     state.products.forEach((item) => {
       counter += item.amount;
+      counterPrice += item.price * item.amount;
     });
 
     dispatch({ type: "CHANGE_TOTAL", payload: counter });
+    dispatch({ type: "CHANGE_TOTAL_PRICE", payload: counterPrice });
   }
 
   useEffect(() => {
