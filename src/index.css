@@ -3,20 +3,33 @@
 @tailwind utilities;
 
 @layer components {
-    .site-container {
-        @apply max-w-7xl mx-auto w-full
-    }
+  .site-container {
+    @apply max-w-7xl mx-auto w-full;
+  }
 
-    html, body, #root{
-        @apply h-full
-    }
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
 
-    #root{
-        @apply flex flex-col
-    }
+  #root {
+    @apply flex flex-col;
+  }
 
+  main {
+    @apply grow;
+  }
 
-    main{
-        @apply grow
-    }
+  .no-products {
+    font-size: 5rem;
+    font-weight: bold;
+    opacity: 60%;
+    color: #ccc;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+  }
 }
