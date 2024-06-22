@@ -1,20 +1,23 @@
-import { FaTrash } from "react-icons/fa6";
 import { useGlobalContext } from "../hooks/useGlobalContext";
-import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
 
 function Cart() {
-  const { total, products, deleteProduct } = useGlobalContext();
+  const { total, products, deleteProduct, totalPrice } = useGlobalContext();
+
   return (
-    <div className="site-container">
-      {/* <Link to="/" className="text-center">Oops! It looks like your cart is empty. Go to the Home page right now.</Link> */}
-      <ul>
-        {products.length > 0 &&
-          products.map((product) => {
-            return <CartItem key={product.id} product={product} />;
-          })}
-      </ul>
-    </div>
+    <ul id="menu" className="site-container">
+      {!products.length && <h1 className="no-products">No Product yet...</h1>}
+      {products.length > 0 &&
+        products.map((product) => {
+          return <CartItem key={product.id} product={product} />;
+        })}
+      {products.length > 0 && (
+        <p id="totalPrice" className="font-medium text-end text-2xl mr-8">
+          Total price:{" "}
+          <span className="font-bold">{totalPrice.toFixed(2)}$</span>
+        </p>
+      )}
+    </ul>
   );
 }
 

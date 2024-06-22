@@ -3,6 +3,7 @@ import { FaTrash } from "react-icons/fa6";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 
 function CartItem({ product }) {
+  const [amount, setAmount] = useState(product.amount);
   const { deleteProduct, decreaseAmount, increaseAmount, calculateTotal } =
     useGlobalContext();
 
@@ -13,10 +14,14 @@ function CartItem({ product }) {
           <img className="w-20 h-20" src={product.thumbnail} />
         </figure>
         <div className="card-body">
-          <h1 className="card-title">{product.title}</h1>
-          <h2>Price: ${product.price}</h2>
-          <h2>discountPercentage: {product.discountPercentage}%</h2>
+          <h1 className="card-title text-2xl font-semibold">{product.title}</h1>
           <p>Amount: {product.amount}</p>
+          <p>
+            Product price:{" "}
+            <span className="ml-1 font-semibold">
+              {(product.price * product.amount).toFixed(2)}$
+            </span>
+          </p>
           <div className="card-actions justify-end">
             <button
               className="btn btn-secondary"
@@ -46,11 +51,6 @@ function CartItem({ product }) {
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        <button onClick={() => calculateTotal(product.id)}>
-          Total Price:{" "}
-        </button>
       </div>
     </li>
   );
