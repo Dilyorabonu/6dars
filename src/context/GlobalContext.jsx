@@ -37,7 +37,6 @@ const changeState = (state, action) => {
 
 function GlobalContextProvider({ children }) {
   const [state, dispatch] = useReducer(changeState, stateFromLocalStorage());
-  console.log(state);
   // add selected product
   const addProduct = (prod) => {
     if (state.products.find((product) => product.id == prod.id)) {

@@ -1,17 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
-
 import { useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 
 function Product() {
   const { addProduct } = useContext(GlobalContext);
-
   const { id } = useParams();
   const { data, setData, error } = useFetch(
     "https://dummyjson.com/products/" + id
   );
-
   const [amount, setAmount] = useState(0);
 
   const handleAdd = () => {
@@ -20,7 +17,8 @@ function Product() {
   return (
     <>
       {data && (
-        <div className="card w-210 bg-base-200 shadow-xl site-container">
+        // Adjust card width for responsiveness
+        <div className="card w-full lg:w-210 bg-base-200 shadow-xl site-container">
           <div className="card-body">
             <h1 className="card-title">Title: {data.title}</h1>
             <p>{data.description}</p>
@@ -52,14 +50,6 @@ function Product() {
                   Add
                 </button>
               </div>
-            </div>
-            <div className="card-actions justify-end">
-              <button
-                onClick={() => changeColor("green")}
-                className="btn btn-secondary"
-              >
-                Click
-              </button>
             </div>
           </div>
         </div>

@@ -4,7 +4,8 @@ function ProductCart({ product }) {
   const { title, id, brand, description, category, thumbnail, price } = product;
   return (
     <Link to={`/product/${id}`}>
-      <div className="card w-96 bg-base-100 shadow-xl">
+      {/* Adjust card width for responsiveness */}
+      <div className="card w-full sm:w-72 lg:w-96 bg-base-100 shadow-xl">
         <figure className="px-10 pt-10">
           <img src={thumbnail} alt="Shoes" className="rounded-xl" />
         </figure>

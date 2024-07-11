@@ -9,7 +9,8 @@ function CartItem({ product }) {
 
   return (
     <li>
-      <div className="card card-side bg-base-200 shadow-xl mb-5">
+      {/* Adjust card layout for responsiveness */}
+      <div className="card card-side bg-base-200 shadow-xl mb-5 flex-col md:flex-row">
         <figure>
           <img className="w-20 h-20" src={product.thumbnail} />
         </figure>
@@ -40,7 +41,7 @@ function CartItem({ product }) {
               <button
                 className="btn"
                 onClick={() => {
-                  if (product.amount == 1) {
+                  if (product.amount === 1) {
                     deleteProduct(product.id);
                   }
                   decreaseAmount(product.id);
